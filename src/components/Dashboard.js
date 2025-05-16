@@ -25,11 +25,13 @@ function Dashboard() {
       const response = await fetch(`${BASE_URL}/api/monitoring/process-csv`, {
         method: 'POST',
       });
-      if (response.status === 201) {
-        setProcessMsg("CSV processed successfully.");
-        setIsProcessing(false);
+      if (response.status === 202) {
+       // setProcessMsg(response.body);
+       console.log(response);
+        setIsProcessing(true);
       } else {
-        setProcessMsg("Failed to process CSV.");
+        setProcessMsg("error");
+        console.log(response);
         setIsProcessing(false);
       }
     } catch (error) {
