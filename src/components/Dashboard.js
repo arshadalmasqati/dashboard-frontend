@@ -7,7 +7,8 @@ function Dashboard() {
   const theme = useTheme();
   const { currentUser, logout } = useAuth();
 
-  const BASE_URL = "http://localhost:8000";
+  const BASE_URL = "http://localhost:8080";
+//URL for Microservices Gateway
 
   const handleLogout = async () => {
     await logout();
