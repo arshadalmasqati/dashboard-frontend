@@ -28,12 +28,11 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - run: npm run build --if-present
-    # - name: Install dependencies
-    # - run: npm install
-    # - name: Build app
-    # - run: npm run build
     - name: Deploy to GitHub Pages
-      uses: arshadalmasqati/github-pages-deploy-action@v4
+      uses: peaceiris/actions-gh-pages@v4
       with:
-          folder: build
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./build
+
+
   
