@@ -5,7 +5,18 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Run `npm install` to install dependencies
 
-Make sure backend is running
+Make sure backend is running i.e Auth and Monitoring Microservices  
+
+# Run
+
+Run `npm start`
+
+#### Login with admin  
+Username: admin  
+Password: admin123  
+Create users from Admin Dashboard  
+
+**Use created username & password to access Water Monitoring Dashboard**
 
 ## Available Scripts
 
