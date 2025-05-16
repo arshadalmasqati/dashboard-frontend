@@ -26,14 +26,12 @@ function Dashboard() {
         method: 'POST',
       });
       if (response.status === 202) {
-       // setProcessMsg(response.body);
-       console.log(response);
         setIsProcessing(true);
       } else {
-        setProcessMsg("error");
         console.log(response);
         setIsProcessing(false);
       }
+      setProcessMsg(await response.text());
     } catch (error) {
       setProcessMsg("Error processing CSV.");
       setIsProcessing(false);
@@ -122,7 +120,7 @@ function Dashboard() {
 <Button variant="contained" color="primary" onClick={processCsv} disabled={isProcessing}>
   Start
 </Button>
-<Typography variant="body2" color={processMsg.includes("successfully") ? "success.main" : "error.main"} sx={{ mt: 1, minHeight: '1.5em' }}>
+<Typography variant="body2" color={processMsg.includes("started") ? "success.main" : "error.main"} sx={{ mt: 1, minHeight: '1.5em' }}>
   {processMsg}
 </Typography>
         {data ? (
