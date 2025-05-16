@@ -120,7 +120,7 @@ function Dashboard() {
 <Button variant="contained" color="primary" onClick={processCsv} disabled={isProcessing}>
   Start
 </Button>
-<Typography variant="body2" color={processMsg.includes("started") ? "success.main" : "error.main"} sx={{ mt: 1, minHeight: '1.5em' }}>
+<Typography variant="body2" color={processMsg.includes("processing") ? "success.main" : "error.main"} sx={{ mt: 1, minHeight: '1.5em' }}>
   {processMsg}
 </Typography>
         {data ? (
