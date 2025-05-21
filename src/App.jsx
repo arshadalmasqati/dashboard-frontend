@@ -1,18 +1,19 @@
 import React from "react";
 import {
   BrowserRouter as Router,
-  Route,
   Routes,
+  Route,
   Navigate,
-  useNavigate,
   useLocation,
+  useNavigate,
 } from "react-router-dom";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
 import AdminDashboard from "./components/AdminDashboard";
 import RiverDataview from "./components/RiverDataview";
-import Navbar from "./components/Navbar";
+import Sidebar from "./components/Sidebar";
+import { Box, Toolbar } from "@mui/material";
 
 function isAdminRole(role) {
   return role === "admin" || role === "ROLE_ADMIN";
@@ -56,40 +57,43 @@ function LoginWrapper() {
 
 function AppRoutes() {
   const location = useLocation();
-  const showNavbar = location.pathname !== "/login";
+  const showSidebar = location.pathname !== "/login";
 
   return (
-    <>
-      {showNavbar && <Navbar />}
-      <Routes>
-        <Route path="/login" element={<LoginWrapper />} />
-        <Route
-          path="/admin"
-          element={
-            <PrivateRoute role="admin">
-              <AdminDashboard />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/dashboard"
-          element={
-            <PrivateRoute>
-              <Dashboard />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/dataview"
-          element={
-            <PrivateRoute>
-              <RiverDataview />
-            </PrivateRoute>
-          }
-        />
-        <Route path="*" element={<Navigate to="/login" replace />} />
-      </Routes>
-    </>
+    <Box sx={{ display: "flex" }}>
+      {showSidebar && <Sidebar />}
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        {showSidebar && <Toolbar />} {/* spacing below drawer title */}
+        <Routes>
+          <Route path="/login" element={<LoginWrapper />} />
+          <Route
+            path="/admin"
+            element={
+              <PrivateRoute role="admin">
+                <AdminDashboard />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/dataview"
+            element={
+              <PrivateRoute>
+                <RiverDataview />
+              </PrivateRoute>
+            }
+          />
+          <Route path="*" element={<Navigate to="/login" replace />} />
+        </Routes>
+      </Box>
+    </Box>
   );
 }
 
